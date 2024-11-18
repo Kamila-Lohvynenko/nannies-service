@@ -1,0 +1,20 @@
+@use '../../styles/utils/placeholders' as *;
+@use '../../styles/utils/mixins' as mx;
+@use '../../styles/utils/variables' as var;
+
+.button {
+  @include mx.flex-center;
+  @extend %button-text;
+
+  gap: 18px;
+
+  padding: 14px 40px;
+
+  border-radius: 30px;
+  border: 1px solid rgba(251, 251, 251, 0.4);
+}
+
+.accent {
+  background-color: var.$red-accent-color;
+  border: transparent;
+}

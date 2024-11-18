@@ -1,0 +1,25 @@
+@use '../../styles/utils/variables' as var;
+
+.nav {
+  display: flex;
+  gap: 40px;
+}
+
+.link {
+  position: relative;
+  color: var.$light-color;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 8px;
+  height: 8px;
+
+  background-color: var.$light-color;
+  border-radius: 50%;
+}

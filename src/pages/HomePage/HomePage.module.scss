@@ -1,0 +1,63 @@
+@use '../../styles/utils/variables' as var;
+
+.page {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  overflow: hidden;
+  margin: 32px;
+
+  border-radius: 30px;
+}
+
+.accentRed {
+  background-color: var.$red-accent-color;
+}
+
+.contentWrapper {
+  padding-top: 250px;
+  padding-left: 96px;
+  padding-bottom: 163px;
+
+  color: #fbfbfb;
+}
+
+.title {
+  margin-bottom: 28px;
+
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -2.1px;
+}
+
+.text {
+  margin-bottom: 64px;
+
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.07;
+  letter-spacing: -0.56px;
+}
+
+.imageWrapper {
+  background-image: url(../../images/home_page.jpg);
+  overflow: hidden;
+}
+
+@media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .imageWrapper {
+    background-image: url(../../images/home_page_2x.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+.icon {
+  width: 18px;
+  height: 14px;
+  fill: var.$light-color;
+}
