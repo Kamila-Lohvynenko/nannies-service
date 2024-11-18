@@ -1,8 +1,12 @@
+@use '../utils/placeholders' as *;
+@use '../utils/variables' as var;
+
 body {
-  font-family: 'Helvetica Neue';
-  font-weight: 400;
-  font-size: 16px;
+  @extend %main-text;
+
+  background-color: var.$light-color;
 }
+
 body {
   margin: 0;
   display: flex;
