@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "nannies-service"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "nannies-service-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
