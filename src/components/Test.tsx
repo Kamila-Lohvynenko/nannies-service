@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { Auth } from '../components/TestAuth';
-import { db, auth, storage } from '../config/firebase';
+import { db, storage } from '../config/firebase';
 import {
   getDocs,
   collection,
