@@ -3,8 +3,8 @@ import styles from './RegisterForm.module.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import sprite from '../../images/sprite.svg';
-import Button from '../Button/Button';
+import sprite from '../../../images/sprite.svg';
+import Button from '../../Button/Button';
 
 interface IForm {
   userName: string;

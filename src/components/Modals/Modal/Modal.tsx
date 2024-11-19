@@ -1,7 +1,7 @@
 import styles from './Modal.module.scss';
 import ReactModal from 'react-modal';
 
-import sprite from '../../images/sprite.svg';
+import sprite from '../../../images/sprite.svg';
 import { ReactNode } from 'react';
 
 interface ModalProps {

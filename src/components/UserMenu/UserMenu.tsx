@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import Button from '../Button/Button';
 import UserInfo from '../UserInfo/UserInfo';
 import styles from './UserMenu.module.scss';
-import Modal from '../Modal/Modal';
-import LoginModal from '../LoginModal/LoginModal';
+import Modal from '../Modals/Modal/Modal';
+import LoginModal from '../Modals/LoginModal/LoginModal';
 import { useState } from 'react';
-import RegisterModal from '../RegisterModal/RegisterModal';
+import RegisterModal from '../Modals/RegisterModal/RegisterModal';
 
 const UserMenu = () => {
   const isLoggedIn = false;
