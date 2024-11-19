@@ -3,6 +3,7 @@ import './App.css';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './Header/Header';
+import Layout from './Layout/Layout';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const NanniesPage = lazy(() => import('../pages/NanniesPage/NanniesPage'));
@@ -13,7 +14,7 @@ const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
 
 function App() {
   return (
-    <>
+    <Layout>
       <Header />
       <Suspense fallback={null}>
         <Routes>
@@ -23,7 +24,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-    </>
+    </Layout>
   );
 }
 

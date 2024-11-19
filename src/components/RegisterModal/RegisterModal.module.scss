@@ -1,0 +1,21 @@
+@use '../../styles/utils/variables' as var;
+@use '../../styles//utils/placeholders' as *;
+
+.wrapper {
+  max-width: 566px;
+
+  padding: 64px;
+
+  border-radius: 30px;
+  background: #fbfbfb;
+}
+
+.title {
+  @extend %title-text;
+
+  margin-bottom: 20px;
+}
+
+.text {
+  margin-bottom: 40px;
+}

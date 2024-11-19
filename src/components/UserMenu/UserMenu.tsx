@@ -2,9 +2,16 @@ import clsx from 'clsx';
 import Button from '../Button/Button';
 import UserInfo from '../UserInfo/UserInfo';
 import styles from './UserMenu.module.scss';
+import Modal from '../Modal/Modal';
+import LoginModal from '../LoginModal/LoginModal';
+import { useState } from 'react';
+import RegisterModal from '../RegisterModal/RegisterModal';
 
 const UserMenu = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
+
+  const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
 
   const menuClassName = clsx(styles.menu, isLoggedIn && styles.loggedIn);
 
@@ -17,12 +24,29 @@ const UserMenu = () => {
         </>
       ) : (
         <>
-          <Button onClick={() => {}}>Log in</Button>
-          <Button onClick={() => {}} accent={true}>
+          <Button
+            onClick={() => {
+              setIsLoginOpen(true);
+            }}
+          >
+            Log in
+          </Button>
+          <Button
+            onClick={() => {
+              setIsRegisterOpen(true);
+            }}
+            accent={true}
+          >
             Registration
           </Button>
         </>
       )}
+      <Modal isOpen={isLoginOpen} setIsOpen={setIsLoginOpen}>
+        <LoginModal />
+      </Modal>
+      <Modal isOpen={isRegisterOpen} setIsOpen={setIsRegisterOpen}>
+        <RegisterModal />
+      </Modal>
     </div>
   );
 };

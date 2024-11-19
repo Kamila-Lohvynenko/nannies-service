@@ -1,0 +1,30 @@
+@use '../../styles/utils/variables' as var;
+
+.input {
+  width: 100%;
+
+  padding: 16px 18px;
+  margin-bottom: 18px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(var.$dark-color, 0.1);
+
+  color: var.$dark-color;
+}
+
+.inputWrapper {
+  position: relative;
+
+  margin-bottom: 40px;
+}
+
+.buttonEye {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+}
+
+.iconEye {
+  stroke: var.$dark-color;
+  fill: transparent;
+}
