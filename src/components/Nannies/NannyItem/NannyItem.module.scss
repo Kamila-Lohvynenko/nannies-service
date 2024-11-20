@@ -1,0 +1,39 @@
+@use '../../../styles/utils/variables' as var;
+@use '../../../styles/utils/placeholders' as *;
+
+.name {
+  color: var.$dark-color;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+
+  margin-bottom: 24px;
+  margin-top: 8px;
+}
+
+.avatarWrapper {
+  display: inline-flex;
+
+  width: 120px;
+  height: 120px;
+
+  padding: 12px;
+
+  border-radius: 30px;
+  border: 2px solid rgba(240, 63, 59, 0.2);
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+
+  border-radius: 15px;
+}
+
+.button {
+  @extend %main-text-bold;
+
+  margin-top: 14px;
+
+  text-decoration: underline;
+}

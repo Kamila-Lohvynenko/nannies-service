@@ -1,0 +1,6 @@
+@use '../../styles/utils/variables' as var;
+
+.page {
+  background-color: var.$light-secondary-color;
+  padding: 64px 128px 100px;
+}

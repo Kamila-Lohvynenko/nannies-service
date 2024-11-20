@@ -1,0 +1,25 @@
+@use '../../../styles/utils/variables' as var;
+@use '../../../styles/utils/mixins' as mx;
+@use '../../../styles/utils/placeholders' as *;
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 8px;
+
+  margin-bottom: 24px;
+}
+
+.wrapper {
+  @include mx.flex-center;
+
+  gap: 2px;
+
+  padding: 8px 16px;
+  border-radius: 24px;
+  background: var.$light-secondary-color;
+
+  dd {
+    @extend %main-text-bold;
+  }
+}

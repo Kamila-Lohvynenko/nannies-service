@@ -1,30 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchNannies } from './operations';
+import { INanny } from './../../types/NannyInterface';
 
-const handlePending = (state: any) => {
+interface INanniesState {
+  items: INanny[];
+  total: number | null;
+  error: boolean;
+  loading: boolean;
+  notFound: boolean;
+}
+
+const initialState: INanniesState = {
+  items: [],
+  total: null,
+  error: false,
+  loading: false,
+  notFound: false,
+};
+
+const handlePending = (state: INanniesState) => {
   state.error = false;
   state.notFound = false;
   state.loading = true;
 };
-const handleRejected = (state: any, { payload }: any) => {
-  if (payload.status === 404) {
-    state.notFound = true;
-    state.loading = false;
-  } else {
-    state.error = true;
-    state.loading = false;
-  }
+const handleRejected = (state: INanniesState) => {
+  state.error = true;
+  state.loading = false;
 };
 
 const nanniesSlice = createSlice({
   name: 'nannies',
-  initialState: {
-    items: [],
-    total: null,
-    error: null,
-    loading: false,
-    notFound: false,
-  },
+  initialState,
   reducers: {
     resetItems: (state) => {
       state.items = [];
@@ -33,13 +39,16 @@ const nanniesSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(fetchNannies.pending, handlePending)
-      .addCase(fetchNannies.fulfilled, (state, { payload }) => {
-        console.log(payload);
-
-        // state.items = [...state.items, ...payload.items];
-        // state.total = payload.total;
-        state.loading = false;
-      })
+      .addCase(
+        fetchNannies.fulfilled,
+        (state, { payload }: PayloadAction<INanny[]>) => {
+          state.items = payload;
+          if (payload.length === 0) {
+            state.notFound = true;
+          }
+          state.loading = false;
+        },
+      )
       .addCase(fetchNannies.rejected, handleRejected),
 });
 

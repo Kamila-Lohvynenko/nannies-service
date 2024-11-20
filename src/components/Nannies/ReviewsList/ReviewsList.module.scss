@@ -1,0 +1,58 @@
+@use '../../../styles/utils/placeholders' as *;
+@use '../../../styles/utils/mixins' as mx;
+@use '../../../styles/utils/variables' as var;
+
+.list .item:not(:last-child) {
+  margin-top: 48px;
+  margin-bottom: 25px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 12px;
+
+  margin-bottom: 16px;
+}
+
+.letter {
+  @include mx.flex-center;
+
+  width: 44px;
+  height: 44px;
+
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+
+  border-radius: 50%;
+}
+
+.red {
+  color: var.$red-accent-color;
+  background-color: rgba($color: var.$red-accent-color, $alpha: 0.2);
+}
+
+.name {
+  @extend %main-text-bold;
+
+  line-height: 1.25;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: var.$dark-color;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.29;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+
+  fill: #ffc531;
+}

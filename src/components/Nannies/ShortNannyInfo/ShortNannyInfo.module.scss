@@ -1,0 +1,41 @@
+@use '../../../styles/utils/placeholders' as *;
+@use '../../../styles/utils/mixins' as mx;
+@use '../../../styles/utils/variables' as var;
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+}
+
+.item {
+  @include mx.flex-center;
+  gap: 8px;
+  padding: 0 16px;
+
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+
+  p {
+    @extend %main-text-bold;
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid rgba(var.$dark-color, 0.2);
+  }
+}
+.iconMap {
+  fill: transparent;
+  stroke: var.$dark-color;
+}
+.iconStar {
+  fill: #ffc531;
+}
+.price {
+  color: #38cd3e;
+}
