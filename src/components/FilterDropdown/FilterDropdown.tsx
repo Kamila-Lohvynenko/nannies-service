@@ -13,6 +13,7 @@ type FilterOption =
 
 const FilterDropdown: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<FilterOption>('A to Z');
+  const [isOpen, setIsOpen] = useState(false);
 
   const filters: FilterOption[] = [
     'A to Z',
@@ -24,33 +25,38 @@ const FilterDropdown: React.FC = () => {
     'Show all',
   ];
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value as FilterOption; // Type assertion for safety
-    setSelectedFilter(selectedValue);
-    console.log(`Selected filter: ${selectedValue}`);
-    // Add your filtering/sorting logic here
+  const handleFilterChange = (filter: FilterOption) => {
+    setSelectedFilter(filter);
+    setIsOpen(false);
   };
 
   return (
-    <div>
-      <label htmlFor="filter-select">Filter:</label>
-      <div className={styles.wrapper}>
-        <select
-          className={styles.select}
-          id="filter-select"
-          value={selectedFilter}
-          onChange={handleFilterChange}
-        >
-          {filters.map((filter) => (
-            <option className={styles.option} key={filter} value={filter}>
-              {filter}
-            </option>
-          ))}
-        </select>
+    <div className={styles.wrapper}>
+      <p>Filters</p>
+      {/* Dropdown Button */}
+      <button onClick={() => setIsOpen(!isOpen)} className={styles.select}>
+        {selectedFilter}
         <svg className={styles.icon} style={{ pointerEvents: 'none' }}>
           <use href={`${sprite}#icon-chevron-down`} />
         </svg>
-      </div>
+      </button>
+
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <ul className={styles.list}>
+          {filters.map((filter) => (
+            <li
+              key={filter}
+              onClick={() => handleFilterChange(filter)}
+              className={`${styles.option} ${
+                selectedFilter === filter && styles.selected
+              }`}
+            >
+              {filter}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

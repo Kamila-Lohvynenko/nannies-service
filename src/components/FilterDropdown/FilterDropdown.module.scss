@@ -5,24 +5,25 @@
   position: relative;
 
   width: 226px;
-  height: 48px;
+
+  margin-bottom: 32px;
+
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
 }
 
 .select {
-  appearance: none;
+  @include mx.flex-center;
+  justify-content: flex-start;
 
-  display: block;
+  position: relative;
 
   width: 226px;
   height: 48px;
 
   padding: 16px 18px;
-  margin-bottom: 32px;
   margin-top: 8px;
-
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 20px;
 
   background-color: var.$red-accent-color;
   color: var.$light-color;
@@ -31,20 +32,33 @@
   cursor: pointer;
 }
 
+.list {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+
+  width: 100%;
+  padding: 16px;
+
+  border-radius: 14px;
+  background-color: #fff;
+  z-index: 1000;
+}
+
 .option {
-  appearance: none;
-
-  //   display: block;
-
   margin-bottom: 12px;
 
   color: rgba(var.$dark-color, 0.3);
-  background-color: var.$light-color;
 
-  //   & :hover {
-  //     background-color: var.$light-color;
-  //     color: var.$dark-color;
-  //   }
+  &:hover {
+    color: var.$dark-color;
+  }
+
+  cursor: pointer;
+}
+
+.option.selected {
+  color: var.$dark-color;
 }
 
 .icon {
