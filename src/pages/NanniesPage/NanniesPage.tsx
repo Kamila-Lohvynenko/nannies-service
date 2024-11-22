@@ -4,6 +4,7 @@ import { fetchNannies } from '../../redux/nannies/operations';
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { selectNannies } from '../../redux/nannies/selectors';
 import NanniesList from '../../components/Nannies/NanniesList/NanniesList';
+import FilterDropdown from '../../components/FilterDropdown/FilterDropdown';
 
 const NanniesPage = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ const NanniesPage = () => {
 
   return (
     <div className={styles.page}>
-      NanniesPage
+      <FilterDropdown />
       <NanniesList nannies={nannies} />
     </div>
   );
