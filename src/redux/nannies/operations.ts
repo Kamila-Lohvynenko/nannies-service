@@ -1,7 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from '../../config/firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import {
+  getDocs,
+  query,
+  collection,
+  orderBy,
+  startAfter,
+  limit,
+  where,
+  doc,
+  getDoc,
+} from 'firebase/firestore';
 import { INanny } from '../../types/NannyInterface';
+import { FetchNanniesParams } from '../../types/FetchNanniesParamsInterface';
 
 interface RejectedValue {
   status: number;
@@ -11,20 +22,73 @@ interface RejectedValue {
 const nanniesCollectionRef = collection(db, 'nannies');
 
 export const fetchNannies = createAsyncThunk<
-  INanny[],
-  void,
-  { rejectValue: RejectedValue }
->('nannies/fetchAll', async (_, thunkAPI) => {
+  { data: INanny[]; lastDocId: string | null }, // Return type will store just the last document ID
+  FetchNanniesParams, // Parameters for the thunk
+  { rejectValue: RejectedValue } // Error handling type
+>('nannies/fetchAll', async (params, thunkAPI) => {
+  const {
+    lastDocId,
+    limit: pageSize = 3,
+    sortBy = 'name',
+    direction = 'asc',
+    priceGreaterThan,
+    priceLessThan,
+    ratingGreaterThan,
+    ratingLessThan,
+  } = params;
+
   try {
-    const data = await getDocs(nanniesCollectionRef);
-    const filteredData = data.docs.map((doc) => ({
+    // Build Firestore query
+    let nannyQuery = query(
+      nanniesCollectionRef,
+      orderBy(sortBy, direction),
+      limit(pageSize),
+    );
+
+    // Apply price filtering if provided
+    if (priceGreaterThan !== undefined) {
+      nannyQuery = query(
+        nannyQuery,
+        where('price_per_hour', '>', priceGreaterThan),
+      );
+    }
+    if (priceLessThan !== undefined) {
+      nannyQuery = query(
+        nannyQuery,
+        where('price_per_hour', '<', priceLessThan),
+      );
+    }
+
+    // Apply rating filtering if provided
+    if (ratingGreaterThan !== undefined) {
+      nannyQuery = query(nannyQuery, where('rating', '>', ratingGreaterThan));
+    }
+    if (ratingLessThan !== undefined) {
+      nannyQuery = query(nannyQuery, where('rating', '<', ratingLessThan));
+    }
+
+    // Apply pagination if `lastDocId` is provided
+    if (lastDocId) {
+      const lastDocRef = doc(db, 'nannies', lastDocId); // Get document reference
+      const lastDocSnapshot = await getDoc(lastDocRef); // Fetch the snapshot
+      if (lastDocSnapshot.exists()) {
+        nannyQuery = query(nannyQuery, startAfter(lastDocSnapshot)); // Use the snapshot
+      }
+    }
+
+    const snapshot = await getDocs(nannyQuery);
+
+    // Transform data and get the last document
+    const nannies = snapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
-    }));
-    return filteredData as INanny[];
+    })) as INanny[];
+
+    const newLastDocId = snapshot.docs[snapshot.docs.length - 1]?.id || null;
+
+    return { data: nannies, lastDocId: newLastDocId };
   } catch (error: any) {
     const { status, message } = error;
-
     return thunkAPI.rejectWithValue({ status, message });
   }
 });

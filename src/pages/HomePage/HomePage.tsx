@@ -2,9 +2,18 @@ import clsx from 'clsx';
 import styles from './HomePage.module.scss';
 import sprite from '../../images/sprite.svg';
 import Button from '../../components/Button/Button';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { resetItems } from '../../redux/nannies/slice';
 
 const HomePage = () => {
   const pageClassName = clsx(styles.page, styles.accentRed);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetItems());
+  }, [dispatch]);
 
   return (
     <div className={pageClassName}>
