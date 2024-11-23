@@ -1,31 +1,39 @@
 import React, { useState } from 'react';
 import styles from './FilterDropdown.module.scss';
 import sprite from '../../images/sprite.svg';
+import { setFilter } from '../../redux/filters/slice';
+import { useAppDispatch } from '../../redux/store/hooks';
 
-type FilterOption =
-  | 'A to Z'
-  | 'Z to A'
-  | 'Less than 10$'
-  | 'Greater than 10$'
-  | 'Popular'
-  | 'Not popular'
-  | 'Show all';
+enum FILTERS {
+  ASC = 'A to Z',
+  DESC = 'Z to A',
+  CHEAP = 'Less than 10$',
+  EXPENSIVE = 'Greater than 10$',
+  POPULAR = 'Popular',
+  NOT_POPULAR = 'Not popular',
+  ALL = 'Show all',
+}
 
 const FilterDropdown: React.FC = () => {
-  const [selectedFilter, setSelectedFilter] = useState<FilterOption>('A to Z');
+  const [selectedFilter, setSelectedFilter] = useState<FILTERS>(FILTERS.ASC);
   const [isOpen, setIsOpen] = useState(false);
 
-  const filters: FilterOption[] = [
-    'A to Z',
-    'Z to A',
-    'Less than 10$',
-    'Greater than 10$',
-    'Popular',
-    'Not popular',
-    'Show all',
-  ];
+  const dispatch = useAppDispatch();
 
-  const handleFilterChange = (filter: FilterOption) => {
+  const filters = Object.values(FILTERS);
+
+  const filterActions = {
+    [FILTERS.ASC]: () => dispatch(setFilter({ direction: 'asc' })),
+    [FILTERS.DESC]: () => dispatch(setFilter({ direction: 'desc' })),
+    [FILTERS.CHEAP]: () => dispatch(setFilter({ priceLessThan: 10 })),
+    [FILTERS.EXPENSIVE]: () => dispatch(setFilter({ priceGreaterThan: 10 })),
+    [FILTERS.POPULAR]: () => dispatch(setFilter({ ratingGreaterThan: 4.81 })),
+    [FILTERS.NOT_POPULAR]: () => dispatch(setFilter({ ratingLessThan: 4.81 })),
+    [FILTERS.ALL]: () => dispatch(setFilter({})),
+  };
+
+  const handleFilterChange = (filter: FILTERS) => {
+    filterActions[filter]?.();
     setSelectedFilter(filter);
     setIsOpen(false);
   };
@@ -33,15 +41,14 @@ const FilterDropdown: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       <p>Filters</p>
-      {/* Dropdown Button */}
+
       <button onClick={() => setIsOpen(!isOpen)} className={styles.select}>
         {selectedFilter}
-        <svg className={styles.icon} style={{ pointerEvents: 'none' }}>
+        <svg className={styles.icon} aria-hidden="true">
           <use href={`${sprite}#icon-chevron-down`} />
         </svg>
       </button>
 
-      {/* Dropdown Menu */}
       {isOpen && (
         <ul className={styles.list}>
           {filters.map((filter) => (
@@ -49,7 +56,7 @@ const FilterDropdown: React.FC = () => {
               key={filter}
               onClick={() => handleFilterChange(filter)}
               className={`${styles.option} ${
-                selectedFilter === filter && styles.selected
+                selectedFilter === filter ? styles.selected : ''
               }`}
             >
               {filter}

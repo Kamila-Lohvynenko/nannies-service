@@ -26,6 +26,8 @@ export const fetchNannies = createAsyncThunk<
   FetchNanniesParams, // Parameters for the thunk
   { rejectValue: RejectedValue } // Error handling type
 >('nannies/fetchAll', async (params, thunkAPI) => {
+  console.log(params);
+
   const {
     lastDocId,
     limit: pageSize = 3,
@@ -88,6 +90,8 @@ export const fetchNannies = createAsyncThunk<
 
     return { data: nannies, lastDocId: newLastDocId };
   } catch (error: any) {
+    console.log(error);
+
     const { status, message } = error;
     return thunkAPI.rejectWithValue({ status, message });
   }

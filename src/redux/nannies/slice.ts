@@ -22,16 +22,6 @@ const initialState: INanniesState = {
   notFound: false,
 };
 
-// const handlePending = (state: INanniesState) => {
-//   state.error = false;
-//   state.notFound = false;
-//   state.loading = true;
-// };
-// const handleRejected = (state: INanniesState) => {
-//   state.error = true;
-//   state.loading = false;
-// };
-
 const nanniesSlice = createSlice({
   name: 'nannies',
   initialState,

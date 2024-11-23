@@ -10,30 +10,36 @@ import {
 import NanniesList from '../../components/Nannies/NanniesList/NanniesList';
 import FilterDropdown from '../../components/FilterDropdown/FilterDropdown';
 import Button from '../../components/Button/Button';
+import { selectFilters } from '../../redux/filters/selectors';
+import { resetItems } from '../../redux/nannies/slice';
 
 const NanniesPage = () => {
   const dispatch = useAppDispatch();
   const nannies = useAppSelector(selectNannies);
   const hasMore = useAppSelector(selectHasMore);
   const lastDocId = useAppSelector(selectLastDocId);
+  const filters = useAppSelector(selectFilters);
 
   useEffect(() => {
-    dispatch(fetchNannies({ ratingGreaterThan: 4.2 }));
-  }, []);
+    dispatch(resetItems());
+    dispatch(fetchNannies(filters));
+  }, [filters]);
 
   return (
     <div className={styles.page}>
       <FilterDropdown />
       <NanniesList nannies={nannies} />
-      {hasMore && (
-        <Button
-          accent={true}
-          onClick={() => dispatch(fetchNannies({ lastDocId }))}
-        >
-          Load more
-        </Button>
-      )}
-      {!hasMore && <p>No more items to load.</p>}
+      <div className={styles.wrapper}>
+        {hasMore && (
+          <Button
+            accent={true}
+            onClick={() => dispatch(fetchNannies({ lastDocId, ...filters }))}
+          >
+            Load more
+          </Button>
+        )}
+        {!hasMore && <p>No more items to load.</p>}
+      </div>
     </div>
   );
 };
