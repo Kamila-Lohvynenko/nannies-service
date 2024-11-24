@@ -26,8 +26,6 @@ export const fetchNannies = createAsyncThunk<
   FetchNanniesParams, // Parameters for the thunk
   { rejectValue: RejectedValue } // Error handling type
 >('nannies/fetchAll', async (params, thunkAPI) => {
-  console.log(params);
-
   const {
     lastDocId,
     limit: pageSize = 3,

@@ -1,7 +1,8 @@
+import { ModalPropsInterface } from '../../../types/ModalPropsInterface';
 import LoginForm from '../LoginForm/LoginForm';
 import styles from './LoginModal.module.scss';
 
-const LoginModal = () => {
+const LoginModal = ({ setIsOpen }: ModalPropsInterface) => {
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Log In</h2>
@@ -9,7 +10,7 @@ const LoginModal = () => {
         Welcome back! Please enter your credentials to access your account and
         continue your babysitter search.
       </p>
-      <LoginForm />
+      <LoginForm setIsOpen={setIsOpen} />
     </div>
   );
 };

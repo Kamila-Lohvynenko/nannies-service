@@ -22,3 +22,8 @@
 .formButton {
   width: 100%;
 }
+
+.border {
+  color: var.$dark-color;
+  border: 1px solid var.$red-accent-color;
+}

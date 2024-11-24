@@ -5,6 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import sprite from '../../../images/sprite.svg';
 import Button from '../../Button/Button';
+import { useAppDispatch } from '../../../redux/store/hooks';
+import { registerUser } from '../../../redux/auth/operations';
+import { ModalPropsInterface } from '../../../types/ModalPropsInterface';
+import toast from 'react-hot-toast';
 
 interface IForm {
   userName: string;
@@ -30,8 +34,10 @@ const validationSchema = Yup.object().shape({
     .required('Password is required'),
 });
 
-const RegisterForm = () => {
+const RegisterForm = ({ setIsOpen }: ModalPropsInterface) => {
   const [visiblePassword, setVisiblePassword] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -45,8 +51,23 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (data: IForm) => {
-    console.log(data);
-    reset();
+    const { userName, email, password } = data;
+    dispatch(registerUser({ email, password, name: userName }))
+      .unwrap()
+      .then(() => {
+        toast.success('Successfully registered', {
+          duration: 2500,
+        });
+        setTimeout(() => {
+          reset();
+          setIsOpen(false);
+        }, 2500);
+      })
+      .catch(() => {
+        toast.error('Please, try again', {
+          duration: 2500,
+        });
+      });
   };
 
   return (

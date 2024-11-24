@@ -6,12 +6,18 @@ import Modal from '../Modals/Modal/Modal';
 import LoginModal from '../Modals/LoginModal/LoginModal';
 import { useState } from 'react';
 import RegisterModal from '../Modals/RegisterModal/RegisterModal';
+import { useAppSelector } from '../../redux/store/hooks';
+import { selectLogin } from '../../redux/auth/selectors';
+import LogoutModal from '../Modals/LogoutModal/LogoutModal';
 
 const UserMenu = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = useAppSelector(selectLogin);
+
+  console.log(isLoggedIn);
 
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
+  const [isLogoutOpen, setIsLogoutOpen] = useState<boolean>(false);
 
   const menuClassName = clsx(styles.menu, isLoggedIn && styles.loggedIn);
 
@@ -20,7 +26,13 @@ const UserMenu = () => {
       {isLoggedIn ? (
         <>
           <UserInfo />
-          <Button onClick={() => {}}>Log out</Button>
+          <Button
+            onClick={() => {
+              setIsLogoutOpen(true);
+            }}
+          >
+            Log out
+          </Button>
         </>
       ) : (
         <>
@@ -42,10 +54,13 @@ const UserMenu = () => {
         </>
       )}
       <Modal isOpen={isLoginOpen} setIsOpen={setIsLoginOpen}>
-        <LoginModal />
+        <LoginModal setIsOpen={setIsLoginOpen} />
       </Modal>
       <Modal isOpen={isRegisterOpen} setIsOpen={setIsRegisterOpen}>
-        <RegisterModal />
+        <RegisterModal setIsOpen={setIsRegisterOpen} />
+      </Modal>
+      <Modal isOpen={isLogoutOpen} setIsOpen={setIsLogoutOpen}>
+        <LogoutModal setIsOpen={setIsLogoutOpen} />
       </Modal>
     </div>
   );

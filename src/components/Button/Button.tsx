@@ -6,13 +6,21 @@ interface ButtonProps {
   children: ReactNode;
   onClick?: () => void;
   accent?: boolean;
+  border?: boolean;
   formButton?: boolean;
 }
 
-const Button = ({ children, onClick, accent, formButton }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  accent,
+  formButton,
+  border,
+}: ButtonProps) => {
   const buttonClassName = clsx(styles.button, {
     [styles.accent]: accent,
     [styles.formButton]: formButton,
+    [styles.border]: border,
   });
 
   return (

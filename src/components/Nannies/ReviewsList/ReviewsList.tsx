@@ -11,9 +11,9 @@ const ReviewsList = ({ reviews }: ReviewsListProps) => {
 
   return (
     <ul className={styles.list}>
-      {reviews.map((review) => {
+      {reviews.map((review, i) => {
         return (
-          <li className={styles.item}>
+          <li key={i} className={styles.item}>
             <div className={styles.wrapper}>
               <div className={`${styles.letter} ${styles[accent]}`}>
                 {review.reviewer[0]}
