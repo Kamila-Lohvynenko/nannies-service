@@ -5,7 +5,10 @@ import {
   loginUser,
   logoutUser,
   fetchCurrentUser,
+  removeFavoriteNanny,
+  addFavoriteNanny,
 } from './operations';
+import { INanny } from '../../types/NannyInterface';
 
 interface AuthState {
   user: any | null;
@@ -92,6 +95,26 @@ const authSlice = createSlice({
         state.user = null;
         state.loading = false;
         state.login = false;
+      })
+      // Add favorite nanny
+      .addCase(addFavoriteNanny.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.favorites.push(action.payload);
+        }
+      })
+      .addCase(addFavoriteNanny.rejected, (state) => {
+        state.error = true;
+      })
+      // Remove favorite nanny
+      .addCase(removeFavoriteNanny.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.favorites = state.user.favorites.filter(
+            (nanny: INanny) => nanny.id !== action.payload.id,
+          );
+        }
+      })
+      .addCase(removeFavoriteNanny.rejected, (state) => {
+        state.error = true;
       });
   },
 });

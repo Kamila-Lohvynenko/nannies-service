@@ -1,0 +1,14 @@
+.favorite,
+.notFavorite {
+  width: 26px;
+  height: 26px;
+}
+
+.notFavorite {
+  stroke: gray;
+  fill: transparent;
+}
+
+.favorite {
+  fill: red;
+}

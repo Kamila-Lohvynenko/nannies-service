@@ -12,8 +12,6 @@ interface NanniesListProps {
 const NanniesList = ({ nannies }: NanniesListProps) => {
   const loading = useAppSelector(selectLoading);
 
-  console.log(nannies);
-
   return (
     <>
       <ul className={styles.list}>

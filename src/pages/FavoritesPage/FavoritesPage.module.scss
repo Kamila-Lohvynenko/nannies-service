@@ -1,0 +1,7 @@
+@use '../../styles/utils/variables' as var;
+@use '../../styles/utils/mixins' as mx;
+
+.page {
+  background-color: var.$light-secondary-color;
+  padding: 64px 128px 100px;
+}

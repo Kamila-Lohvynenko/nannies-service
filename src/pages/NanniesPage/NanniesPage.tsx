@@ -14,7 +14,6 @@ import Button from '../../components/Button/Button';
 import { selectFilters } from '../../redux/filters/selectors';
 import { resetItems } from '../../redux/nannies/slice';
 import { fetchCurrentUser } from '../../redux/auth/operations';
-import { selectUserInfo } from '../../redux/auth/selectors';
 
 const NanniesPage = () => {
   const dispatch = useAppDispatch();
@@ -23,15 +22,12 @@ const NanniesPage = () => {
   const lastDocId = useAppSelector(selectLastDocId);
   const filters = useAppSelector(selectFilters);
   const loading = useAppSelector(selectLoading);
-  const user = useAppSelector(selectUserInfo);
 
   useEffect(() => {
     dispatch(resetItems());
     dispatch(fetchCurrentUser());
     dispatch(fetchNannies(filters));
   }, [filters]);
-
-  console.log(user);
 
   return (
     <div className={styles.page}>

@@ -7,13 +7,22 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
+import { INanny } from '../../types/NannyInterface';
 
 interface AuthUser {
   uid: string;
   email: string | null;
   displayName: string | null;
+  favorites: INanny[];
 }
 
 // Register user with email and password
@@ -42,6 +51,7 @@ export const registerUser = createAsyncThunk(
       const userDocRef = doc(db, 'users', user.uid);
       await setDoc(userDocRef, {
         name,
+        favorites: [],
       });
 
       return {
@@ -104,17 +114,31 @@ export const fetchCurrentUser = createAsyncThunk<AuthUser, void>(
   'auth/fetchCurrentUser',
   async (_, thunkAPI) => {
     try {
-      return new Promise((resolve, reject) => {
+      return new Promise<AuthUser>((resolve, reject) => {
         const unsubscribe = onAuthStateChanged(
           auth,
-          (user) => {
+          async (user) => {
             unsubscribe(); // Stop listening once we get the user
+
             if (user) {
-              resolve({
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName,
-              });
+              try {
+                // Fetch user data from Firestore
+                const userDocRef = doc(db, 'users', user.uid);
+                const userDoc = await getDoc(userDocRef);
+
+                const favorites = userDoc.exists()
+                  ? userDoc.data()?.favorites || []
+                  : [];
+
+                resolve({
+                  uid: user.uid,
+                  email: user.email,
+                  displayName: user.displayName,
+                  favorites,
+                });
+              } catch (firestoreError: any) {
+                reject(`Failed to fetch user data: ${firestoreError.message}`);
+              }
             } else {
               reject('No user is logged in');
             }
@@ -123,6 +147,45 @@ export const fetchCurrentUser = createAsyncThunk<AuthUser, void>(
         );
       });
     } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+// Add a nanny to favorites
+export const addFavoriteNanny = createAsyncThunk(
+  'auth/addFavoriteNanny',
+  async ({ userId, nanny }: { userId: string; nanny: INanny }, thunkAPI) => {
+    try {
+      const userDocRef = doc(db, 'users', userId);
+
+      await updateDoc(userDocRef, {
+        favorites: arrayUnion(nanny),
+      });
+
+      return nanny;
+    } catch (error: any) {
+      console.error('Error adding favorite nanny:', error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+// remove nanny from favorites
+
+export const removeFavoriteNanny = createAsyncThunk(
+  'auth/removeFavoriteNanny',
+  async ({ userId, nanny }: { userId: string; nanny: INanny }, thunkAPI) => {
+    try {
+      const userDocRef = doc(db, 'users', userId);
+
+      await updateDoc(userDocRef, {
+        favorites: arrayRemove(nanny),
+      });
+
+      return nanny;
+    } catch (error: any) {
+      console.error('Error removing favorite nanny:', error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },

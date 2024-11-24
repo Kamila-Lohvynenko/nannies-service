@@ -28,6 +28,7 @@ const NannyItem = ({ nanny }: NannyItemProps) => {
       </div>
       <div>
         <ShortNannyInfo nanny={nanny} />
+
         <h2 className={styles.name}>{nanny.name}</h2>
         <NannyInfoList nanny={nanny} />
         <p>{nanny.about}</p>
