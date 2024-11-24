@@ -1,0 +1,44 @@
+@use '../../../styles/utils/variables' as var;
+@use '../../../styles//utils/placeholders' as *;
+
+.wrapper {
+  max-width: 600px;
+  max-height: 98vh;
+
+  overflow: auto;
+
+  padding: 64px;
+
+  border-radius: 30px;
+  background: #fbfbfb;
+}
+
+.title {
+  @extend %title-text;
+
+  margin-bottom: 20px;
+}
+
+.text {
+  margin-bottom: 40px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 15px;
+}
+
+.nannyInfo {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 40px;
+}
+
+.name {
+  @extend %main-text-bold;
+}

@@ -1,0 +1,54 @@
+@use '../../../styles/utils/variables' as var;
+@use '../../../styles//utils/placeholders' as *;
+
+.form {
+  @extend %main-text;
+  color: var.$dark-color;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8px;
+  row-gap: 16px;
+
+  grid-template-areas:
+    'address phone'
+    'child time'
+    'email email'
+    'parent parent'
+    'comment  comment'
+    'button button';
+}
+
+.input {
+  width: 100%;
+
+  padding: 16px;
+  padding-left: 18px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(17, 16, 28, 0.1);
+}
+
+.textarea {
+  width: 100%;
+  height: 116px;
+  padding: 16px;
+  padding-left: 18px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(17, 16, 28, 0.1);
+}
+
+@each $value in address, phone, child, time, email, parent, comment, button {
+  .#{$value} {
+    grid-area: $value;
+  }
+}
+.button {
+  margin-top: 40px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}

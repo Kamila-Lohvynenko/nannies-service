@@ -4,6 +4,7 @@ import NannyInfoList from '../NannyInfoList/NannyInfoList';
 import ShortNannyInfo from '../ShortNannyInfo/ShortNannyInfo';
 import styles from './NannyItem.module.scss';
 import ReviewsList from '../ReviewsList/ReviewsList';
+import AppointmentButton from '../../AppointmentButton/AppointmentButton';
 
 interface NannyItemProps {
   nanny: INanny;
@@ -30,7 +31,12 @@ const NannyItem = ({ nanny }: NannyItemProps) => {
         <h2 className={styles.name}>{nanny.name}</h2>
         <NannyInfoList nanny={nanny} />
         <p>{nanny.about}</p>
-        {isExpanded && <ReviewsList reviews={nanny.reviews} />}
+        {isExpanded && (
+          <>
+            <ReviewsList reviews={nanny.reviews} />
+            <AppointmentButton nanny={nanny} />
+          </>
+        )}
         <button className={styles.button} onClick={toggleExpand}>
           {isExpanded ? 'Read less' : 'Read more'}
         </button>
