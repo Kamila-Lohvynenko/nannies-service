@@ -2,6 +2,8 @@
 @use '../../styles/utils/mixins' as mx;
 
 .page {
+  height: 100vh;
+
   background-color: var.$light-secondary-color;
   padding: 64px 128px 100px;
 }
