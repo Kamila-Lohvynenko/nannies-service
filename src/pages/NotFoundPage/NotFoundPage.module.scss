@@ -1,0 +1,16 @@
+@use '../../styles/utils/mixins' as mx;
+
+.page {
+  @include mx.flex-center($column: true);
+
+  gap: 24px;
+
+  height: calc(100vh - 88px);
+
+  border: 1px solid black;
+}
+
+.icon {
+  height: 128px;
+  width: 128px;
+}
