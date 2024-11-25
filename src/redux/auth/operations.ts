@@ -87,8 +87,6 @@ export const loginUser = createAsyncThunk(
         displayName: user.displayName,
       };
     } catch (error: any) {
-      console.log(error);
-
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -102,7 +100,6 @@ export const logoutUser = createAsyncThunk(
       await signOut(auth);
       console.log('User logged out successfully');
     } catch (error: any) {
-      console.error('Error logging out:', error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -165,7 +162,6 @@ export const addFavoriteNanny = createAsyncThunk(
 
       return nanny;
     } catch (error: any) {
-      console.error('Error adding favorite nanny:', error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -185,7 +181,6 @@ export const removeFavoriteNanny = createAsyncThunk(
 
       return nanny;
     } catch (error: any) {
-      console.error('Error removing favorite nanny:', error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },

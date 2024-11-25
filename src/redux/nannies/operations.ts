@@ -22,9 +22,9 @@ interface RejectedValue {
 const nanniesCollectionRef = collection(db, 'nannies');
 
 export const fetchNannies = createAsyncThunk<
-  { data: INanny[]; lastDocId: string | null }, // Return type will store just the last document ID
-  FetchNanniesParams, // Parameters for the thunk
-  { rejectValue: RejectedValue } // Error handling type
+  { data: INanny[]; lastDocId: string | null },
+  FetchNanniesParams,
+  { rejectValue: RejectedValue }
 >('nannies/fetchAll', async (params, thunkAPI) => {
   const {
     lastDocId,
@@ -78,8 +78,6 @@ export const fetchNannies = createAsyncThunk<
 
     return { data: nannies, lastDocId: newLastDocId };
   } catch (error: any) {
-    console.log(error);
-
     const { status, message } = error;
     return thunkAPI.rejectWithValue({ status, message });
   }

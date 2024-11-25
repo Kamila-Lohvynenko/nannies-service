@@ -6,7 +6,7 @@ import { useState } from 'react';
 import sprite from '../../../images/sprite.svg';
 import Button from '../../Button/Button';
 import { useAppDispatch } from '../../../redux/store/hooks';
-import { loginUser } from '../../../redux/auth/operations';
+import { fetchCurrentUser, loginUser } from '../../../redux/auth/operations';
 import { ModalPropsInterface } from '../../../types/ModalPropsInterface';
 import { toast } from 'react-hot-toast';
 
@@ -51,13 +51,14 @@ const LoginForm = ({ setIsOpen }: ModalPropsInterface) => {
         toast.success('Successfully logged in', {
           duration: 2500,
         });
+        dispatch(fetchCurrentUser());
         setTimeout(() => {
           reset();
           setIsOpen(false);
         }, 2000);
       })
       .catch(() => {
-        toast.error('Please, try again', {
+        toast.error('Wrong password or email', {
           duration: 2000,
         });
       });
