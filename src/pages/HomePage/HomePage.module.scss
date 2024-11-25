@@ -128,7 +128,7 @@
 
   @each $color, $value in var.$accent-colors {
     &--#{'#{$color}'} {
-      border-color: $value;
+      background-color: $value;
     }
   }
 
