@@ -41,7 +41,7 @@ const LoginForm = ({ setIsOpen }: ModalPropsInterface) => {
   } = useForm<IForm>({
     values: { email: '', password: '' },
     resolver: yupResolver(validationSchema),
-    mode: 'onChange',
+    mode: 'onBlur',
   });
 
   const onSubmit = (data: IForm) => {
@@ -67,16 +67,18 @@ const LoginForm = ({ setIsOpen }: ModalPropsInterface) => {
   return (
     <div className={styles.wrapper}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="email"
-          placeholder="Email"
-          {...register('email')}
-          className={`${styles.input} ${errors.email ? styles.error : ''}`}
-        />
-        {errors.email && (
-          <p className={styles.errorMessage}>{errors.email.message}</p>
-        )}
-        <div className={styles.inputWrapper}>
+        <div className={styles.inputEmailWrapper}>
+          <input
+            type="email"
+            placeholder="Email"
+            {...register('email')}
+            className={`${styles.input} ${errors.email ? styles.error : ''}`}
+          />
+          {errors.email && (
+            <p className={styles.errorMessage}>{errors.email.message}</p>
+          )}
+        </div>
+        <div className={styles.inputPasswordWrapper}>
           <input
             type={visiblePassword ? 'text' : 'password'}
             {...register('password')}
@@ -85,6 +87,7 @@ const LoginForm = ({ setIsOpen }: ModalPropsInterface) => {
           ></input>
           <button
             className={styles.buttonEye}
+            type="button"
             onClick={() => setVisiblePassword(!visiblePassword)}
           >
             <svg className={styles.iconEye} width={20} height={20}>

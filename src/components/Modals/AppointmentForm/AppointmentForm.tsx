@@ -44,7 +44,8 @@ const AppointmentForm = ({ setIsOpen }: ModalPropsInterface) => {
     control,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(validationSchema), // Apply Yup resolver
+    resolver: yupResolver(validationSchema),
+    mode: 'onBlur', // Apply Yup resolver
   });
 
   const onSubmit = (data: FormData) => {

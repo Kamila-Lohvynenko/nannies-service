@@ -4,7 +4,6 @@
   width: 100%;
 
   padding: 16px 18px;
-  margin-bottom: 18px;
 
   border-radius: 12px;
   border: 1px solid rgba(var.$dark-color, 0.1);
@@ -12,7 +11,11 @@
   color: var.$dark-color;
 }
 
-.inputWrapper {
+.inputEmailWrapper {
+  margin-bottom: 18px;
+}
+
+.inputPasswordWrapper {
   position: relative;
 
   margin-bottom: 40px;

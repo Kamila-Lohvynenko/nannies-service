@@ -47,7 +47,7 @@ const RegisterForm = ({ setIsOpen }: ModalPropsInterface) => {
   } = useForm<IForm>({
     values: { userName: '', email: '', password: '' },
     resolver: yupResolver(validationSchema),
-    mode: 'onChange',
+    mode: 'onBlur',
   });
 
   const onSubmit = (data: IForm) => {
@@ -101,6 +101,7 @@ const RegisterForm = ({ setIsOpen }: ModalPropsInterface) => {
           <button
             className={styles.buttonEye}
             onClick={() => setVisiblePassword(!visiblePassword)}
+            type="button"
           >
             <svg className={styles.iconEye} width={20} height={20}>
               <use
