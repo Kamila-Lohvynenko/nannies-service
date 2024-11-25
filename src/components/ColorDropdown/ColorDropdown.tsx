@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import styles from './ColorDropdown.module.scss';
 import sprite from '../../images/sprite.svg';
 import { setColor } from '../../redux/color/slice';
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { selectColor } from '../../redux/color/selectors';
+import { useState } from 'react';
 
 enum COLORS {
   RED = 'Red',
