@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './Header/Header';
 import Layout from './Layout/Layout';
 import { Toaster } from 'react-hot-toast';
+import PrivateRoute from './PrivateRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const NanniesPage = lazy(() => import('../pages/NanniesPage/NanniesPage'));
@@ -21,7 +22,15 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/nannies" element={<NanniesPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route
+            path="/favorites"
+            element={
+              <PrivateRoute
+                component={<FavoritesPage />}
+                redirectTo="/nannies"
+              />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
