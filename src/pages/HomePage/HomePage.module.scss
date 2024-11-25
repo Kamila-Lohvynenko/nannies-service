@@ -92,7 +92,7 @@
 }
 
 @each $color, $value in var.$accent-colors {
-  .#{$color} {
+  .#{'#{$color}'} {
     background-color: $value;
   }
 }
@@ -127,8 +127,8 @@
   border-radius: 13px;
 
   @each $color, $value in var.$accent-colors {
-    &--#{$color} {
-      background-color: $value;
+    &--#{'#{$color}'} {
+      border-color: $value;
     }
   }
 
