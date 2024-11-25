@@ -8,6 +8,7 @@ import { selectLogin, selectUserInfo } from '../../redux/auth/selectors';
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { INanny } from '../../types/NannyInterface';
 import styles from './FavoriteButton.module.scss';
+import { selectColor } from '../../redux/color/selectors';
 
 interface FavoriteButtonProps {
   nanny: INanny;
@@ -16,6 +17,7 @@ interface FavoriteButtonProps {
 const FavoriteButton = ({ nanny }: FavoriteButtonProps) => {
   const dispatch = useAppDispatch();
 
+  const color = useAppSelector(selectColor);
   const login = useAppSelector(selectLogin);
   const userinfo = useAppSelector(selectUserInfo);
   const userId = userinfo?.uid;
@@ -47,7 +49,7 @@ const FavoriteButton = ({ nanny }: FavoriteButtonProps) => {
       className={styles.button}
     >
       {isFavorite ? (
-        <svg className={styles.favorite}>
+        <svg className={`${styles.favorite} ${styles[`favorite--${color}`]}`}>
           <use href={`${sprite}#icon-heart-hover`} />
         </svg>
       ) : (

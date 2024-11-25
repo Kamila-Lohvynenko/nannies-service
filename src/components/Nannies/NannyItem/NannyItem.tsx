@@ -5,6 +5,8 @@ import ShortNannyInfo from '../ShortNannyInfo/ShortNannyInfo';
 import styles from './NannyItem.module.scss';
 import ReviewsList from '../ReviewsList/ReviewsList';
 import AppointmentButton from '../../AppointmentButton/AppointmentButton';
+import { useAppSelector } from '../../../redux/store/hooks';
+import { selectColor } from '../../../redux/color/selectors';
 
 interface NannyItemProps {
   nanny: INanny;
@@ -12,6 +14,7 @@ interface NannyItemProps {
 
 const NannyItem = ({ nanny }: NannyItemProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const color = useAppSelector(selectColor);
 
   const toggleExpand = () => {
     setIsExpanded((prev) => !prev);
@@ -19,7 +22,11 @@ const NannyItem = ({ nanny }: NannyItemProps) => {
 
   return (
     <>
-      <div className={styles.avatarWrapper}>
+      <div
+        className={`${styles.avatarWrapper} ${
+          styles[`avatarWrapper--${color}`]
+        }`}
+      >
         <img
           src={nanny.avatar_url}
           alt="nanny photo"

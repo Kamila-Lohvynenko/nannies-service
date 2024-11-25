@@ -1,3 +1,5 @@
+@use '../../styles/utils/variables' as var;
+
 .loader {
   width: 32px;
   height: 32px;
@@ -6,8 +8,13 @@
 
   position: relative;
   border-radius: 50%;
-  color: #ff3d00;
   animation: fill 1s ease-in infinite alternate;
+
+  @each $color, $value in var.$accent-colors {
+    &--#{$color} {
+      color: $value;
+    }
+  }
 }
 .loader::before,
 .loader::after {

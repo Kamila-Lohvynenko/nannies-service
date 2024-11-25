@@ -21,16 +21,27 @@
   }
 }
 
-.accent {
-  background-color: var.$red-accent-color;
-  border: transparent;
-}
-
 .formButton {
   width: 100%;
 }
 
 .border {
   color: var.$dark-color;
-  border: 1px solid var.$red-accent-color;
+  border: 1px solid transparent;
+
+  @each $color, $value in var.$accent-colors {
+    &--#{$color} {
+      border-color: $value;
+    }
+  }
+}
+
+.accent {
+  border: transparent;
+
+  @each $color, $value in var.$accent-colors {
+    &--#{$color} {
+      background-color: $value;
+    }
+  }
 }

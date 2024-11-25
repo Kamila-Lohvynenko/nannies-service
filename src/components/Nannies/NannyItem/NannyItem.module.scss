@@ -20,7 +20,12 @@
   padding: 12px;
 
   border-radius: 30px;
-  border: 2px solid rgba(240, 63, 59, 0.2);
+  border: 2px solid transparent;
+  @each $color, $value in var.$accent-colors {
+    &--#{$color} {
+      border-color: rgba($value, 0.2);
+    }
+  }
 }
 
 .avatar {

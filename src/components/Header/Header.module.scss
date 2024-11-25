@@ -12,8 +12,10 @@
   padding: 20px 128px;
 }
 
-.accentRed {
-  background-color: var.$red-accent-color;
+@each $color, $value in var.$accent-colors {
+  .#{$color} {
+    background-color: $value;
+  }
 }
 
 .home {

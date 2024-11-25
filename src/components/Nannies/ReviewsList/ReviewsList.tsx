@@ -1,13 +1,15 @@
 import { IReview } from '../../../types/NannyInterface';
 import styles from './ReviewsList.module.scss';
 import sprite from '../../../images/sprite.svg';
+import { useAppSelector } from '../../../redux/store/hooks';
+import { selectColor } from '../../../redux/color/selectors';
 
 interface ReviewsListProps {
   reviews: IReview[];
 }
 
 const ReviewsList = ({ reviews }: ReviewsListProps) => {
-  const accent = 'red';
+  const color = useAppSelector(selectColor);
 
   return (
     <ul className={styles.list}>
@@ -15,7 +17,7 @@ const ReviewsList = ({ reviews }: ReviewsListProps) => {
         return (
           <li key={i} className={styles.item}>
             <div className={styles.wrapper}>
-              <div className={`${styles.letter} ${styles[accent]}`}>
+              <div className={`${styles.letter} ${styles[`letter--${color}`]}`}>
                 {review.reviewer[0]}
               </div>
               <div className={styles.nameWrapper}>

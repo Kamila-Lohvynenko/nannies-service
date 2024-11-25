@@ -14,6 +14,7 @@ import Button from '../../components/Button/Button';
 import { selectFilters } from '../../redux/filters/selectors';
 import { resetItems } from '../../redux/nannies/slice';
 import { fetchCurrentUser } from '../../redux/auth/operations';
+import ColorDropdown from '../../components/ColorDropdown/ColorDropdown';
 
 const NanniesPage = () => {
   const dispatch = useAppDispatch();
@@ -31,7 +32,10 @@ const NanniesPage = () => {
 
   return (
     <div className={styles.page}>
-      <FilterDropdown />
+      <div className={styles.dropDown}>
+        <FilterDropdown />
+        <ColorDropdown />
+      </div>
       <NanniesList nannies={nannies} />
       <div className={styles.wrapper}>
         {hasMore && !loading && (

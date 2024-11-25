@@ -1,3 +1,5 @@
+@use '../../styles/utils/variables' as var;
+
 .favorite,
 .notFavorite {
   width: 26px;
@@ -10,5 +12,9 @@
 }
 
 .favorite {
-  fill: red;
+  @each $color, $value in var.$accent-colors {
+    &--#{$color} {
+      fill: $value;
+    }
+  }
 }

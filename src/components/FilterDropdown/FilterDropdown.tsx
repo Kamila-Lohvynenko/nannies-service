@@ -3,6 +3,8 @@ import styles from './FilterDropdown.module.scss';
 import sprite from '../../images/sprite.svg';
 import { setFilter } from '../../redux/filters/slice';
 import { useAppDispatch } from '../../redux/store/hooks';
+import { useSelector } from 'react-redux';
+import { selectColor } from '../../redux/color/selectors';
 
 enum FILTERS {
   ASC = 'A to Z',
@@ -19,6 +21,8 @@ const FilterDropdown: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const dispatch = useAppDispatch();
+
+  const color = useSelector(selectColor);
 
   const filters = Object.values(FILTERS);
 
@@ -42,7 +46,10 @@ const FilterDropdown: React.FC = () => {
     <div className={styles.wrapper}>
       <p>Filters</p>
 
-      <button onClick={() => setIsOpen(!isOpen)} className={styles.select}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`${styles.select} ${styles[`select--${color}`]}`}
+      >
         {selectedFilter}
         <svg className={styles.icon} aria-hidden="true">
           <use href={`${sprite}#icon-chevron-down`} />

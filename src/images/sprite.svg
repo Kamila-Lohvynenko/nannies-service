@@ -41,5 +41,8 @@
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3" d="M28 13.333c0 9.333-12 17.333-12 17.333s-12-8-12-17.333c0-3.183 1.264-6.235 3.515-8.485s5.303-3.515 8.485-3.515c3.183 0 6.235 1.264 8.485 3.515s3.515 5.303 3.515 8.485z"></path>
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3" d="M16 17.333c2.209 0 4-1.791 4-4s-1.791-4-4-4c-2.209 0-4 1.791-4 4s1.791 4 4 4z"></path>
 </symbol>
+<symbol id="icon-check" viewBox="0 0 32 32">
+<path fill="#fbfbfb" style="fill: var(--color1, #fbfbfb)" d="M8 13.333l-2.667 2.667 8 8 13.333-13.333-2.667-2.667-10.667 10.667-5.333-5.333z"></path>
+</symbol>
 </defs>
 </svg>

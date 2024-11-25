@@ -1,44 +1,58 @@
+@use '../../styles/utils/placeholders' as *;
 @use '../../styles/utils/mixins' as mx;
 @use '../../styles/utils/variables' as var;
 
 .wrapper {
   position: relative;
-
-  width: 226px;
-
-  margin-bottom: 32px;
-
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 20px;
 }
 
 .select {
   @include mx.flex-center;
-  justify-content: flex-start;
+  @extend %button-text;
 
-  position: relative;
+  gap: 4px;
 
-  width: 226px;
-  height: 48px;
+  padding: 8px 24px;
 
-  padding: 16px 18px;
-  margin-top: 8px;
+  border-radius: 30px;
 
-  color: var.$light-color;
-  border-radius: 14px;
+  transition: box-shadow 0.3s ease;
 
-  cursor: pointer;
+  color: var.$dark-color;
+  border: 1px solid transparent;
 
   @each $color, $value in var.$accent-colors {
     &--#{$color} {
-      background-color: $value;
+      border-color: $value;
+    }
+  }
+
+  &:hover,
+  &:active {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.home {
+  background-color: var.$light-color;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+
+  fill: transparent;
+
+  @each $color, $value in var.$accent-colors {
+    &--#{$color} {
+      stroke: $value;
     }
   }
 }
 
 .list {
   position: absolute;
+
   top: calc(100% + 8px);
   left: 0;
 
@@ -64,16 +78,4 @@
 
 .option.selected {
   color: var.$dark-color;
-}
-
-.icon {
-  position: absolute;
-  top: 14px;
-  right: 18px;
-
-  width: 20px;
-  height: 20px;
-
-  stroke: var.$light-color;
-  fill: transparent;
 }

@@ -13,10 +13,6 @@
   border-radius: 30px;
 }
 
-.accentRed {
-  background-color: var.$red-accent-color;
-}
-
 .contentWrapper {
   padding-top: 250px;
   padding-left: 96px;
@@ -44,6 +40,8 @@
 }
 
 .imageWrapper {
+  position: relative;
+
   background-image: url(../../images/home_page.jpg);
   overflow: hidden;
 }
@@ -91,4 +89,56 @@
   fill: var.$light-color;
 
   transition: transform 0.3s ease;
+}
+
+@each $color, $value in var.$accent-colors {
+  .#{$color} {
+    background-color: $value;
+  }
+}
+
+.dropdown {
+  position: absolute;
+
+  top: 124px;
+  right: 50px;
+}
+
+.info {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+
+  display: flex;
+  gap: 16px;
+
+  padding: 32px;
+
+  border-radius: 20px;
+  background-color: var.$light-color;
+  z-index: 5;
+}
+
+.checkBox {
+  @include mx.flex-center;
+
+  padding: 12px;
+
+  border-radius: 13px;
+
+  @each $color, $value in var.$accent-colors {
+    &--#{$color} {
+      background-color: $value;
+    }
+  }
+
+  & > .icon {
+    height: 30px;
+    width: 30px;
+  }
+}
+.price {
+  color: var.$dark-color;
+  font-size: 24px;
+  font-weight: 600;
 }

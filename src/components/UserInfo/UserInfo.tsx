@@ -3,13 +3,15 @@ import sprite from '../../images/sprite.svg';
 import clsx from 'clsx';
 import { useAppSelector } from '../../redux/store/hooks';
 import { selectUserInfo } from '../../redux/auth/selectors';
+import { useSelector } from 'react-redux';
+import { selectColor } from '../../redux/color/selectors';
 
 const UserInfo = () => {
-  const iconClassName = clsx(styles.icon, styles.accentRed);
+  const color = useSelector(selectColor);
+  const iconClassName = clsx(styles.icon, styles[`icon--${color}`]);
 
   const userInfo = useAppSelector(selectUserInfo);
   const userName = userInfo.displayName;
-  console.log(userName);
 
   return (
     <div className={styles.info}>

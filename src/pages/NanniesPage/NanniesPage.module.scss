@@ -6,6 +6,12 @@
   padding: 64px 128px 100px;
 }
 
+.dropDown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .wrapper {
   @include mx.flex-center;
 }

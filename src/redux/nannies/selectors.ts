@@ -1,4 +1,6 @@
-export const selectNannies = (store: any) => store.nannies.items;
-export const selectHasMore = (store: any) => store.nannies.hasMore;
-export const selectLastDocId = (store: any) => store.nannies.lastDocId;
-export const selectLoading = (store: any) => store.nannies.loading;
+import { RootState } from '../store/store';
+
+export const selectNannies = (store: RootState) => store.nannies.items;
+export const selectHasMore = (store: RootState) => store.nannies.hasMore;
+export const selectLastDocId = (store: RootState) => store.nannies.lastDocId;
+export const selectLoading = (store: RootState) => store.nannies.loading;
