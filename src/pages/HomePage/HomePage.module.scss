@@ -1,4 +1,6 @@
 @use '../../styles/utils/variables' as var;
+@use '../../styles/utils/placeholders' as *;
+@use '../../styles/utils/mixins' as mx;
 
 .page {
   position: relative;
@@ -56,8 +58,37 @@
   }
 }
 
+.link {
+  @include mx.flex-center;
+  @extend %button-text;
+
+  display: inline-flex;
+  gap: 18px;
+
+  padding: 18px 50px;
+
+  border-radius: 30px;
+  border: 1px solid rgba(251, 251, 251, 0.4);
+
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+
+  transition: box-shadow 0.3s ease;
+
+  &:hover,
+  &:active {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover > .icon,
+  &:active > .icon {
+    transform: rotate(53deg);
+  }
+}
+
 .icon {
   width: 18px;
   height: 14px;
   fill: var.$light-color;
+
+  transition: transform 0.3s ease;
 }

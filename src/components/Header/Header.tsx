@@ -8,17 +8,18 @@ import UserMenu from '../UserMenu/UserMenu';
 const Header = () => {
   const location = useLocation();
   const path = location.pathname;
+  const home = path === '/';
 
   const headerClassName = clsx(
     styles.header,
-    path === '/' && styles.home,
+    home && styles.home,
     styles.accentRed,
   );
 
   return (
     <header className={headerClassName}>
       <Logo />
-      <Navigation />
+      <Navigation home={home} />
       <UserMenu />
     </header>
   );

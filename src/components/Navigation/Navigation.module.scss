@@ -23,3 +23,10 @@
   background-color: var.$light-color;
   border-radius: 50%;
 }
+.home {
+  position: absolute;
+  top: 34px;
+  left: calc(100% / 2 + 70px);
+
+  z-index: 5;
+}
