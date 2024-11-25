@@ -60,8 +60,6 @@ const authSlice = createSlice({
         state.error = false;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log(action);
-
         state.user = {
           uid: action.payload.uid,
           email: action.payload.email,

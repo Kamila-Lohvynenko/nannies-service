@@ -33,8 +33,6 @@ export const fetchNannies = createAsyncThunk<
     direction = 'asc',
     priceGreaterThan,
     priceLessThan,
-    ratingGreaterThan,
-    ratingLessThan,
   } = params;
 
   try {
@@ -57,14 +55,6 @@ export const fetchNannies = createAsyncThunk<
         nannyQuery,
         where('price_per_hour', '<', priceLessThan),
       );
-    }
-
-    // Apply rating filtering if provided
-    if (ratingGreaterThan !== undefined) {
-      nannyQuery = query(nannyQuery, where('rating', '>', ratingGreaterThan));
-    }
-    if (ratingLessThan !== undefined) {
-      nannyQuery = query(nannyQuery, where('rating', '<', ratingLessThan));
     }
 
     // Apply pagination if `lastDocId` is provided

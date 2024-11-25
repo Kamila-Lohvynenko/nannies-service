@@ -45,7 +45,6 @@ const LoginForm = ({ setIsOpen }: ModalPropsInterface) => {
   });
 
   const onSubmit = (data: IForm) => {
-    console.log(data);
     dispatch(loginUser(data))
       .unwrap()
       .then(() => {

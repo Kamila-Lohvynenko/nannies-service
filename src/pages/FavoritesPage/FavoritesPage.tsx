@@ -20,7 +20,6 @@ const FavoritesPage = () => {
 
   const userInfo = useAppSelector(selectUserInfo);
   const favorites: INanny[] = userInfo?.favorites || [];
-  console.log(userInfo);
 
   return (
     <div className={styles.page}>

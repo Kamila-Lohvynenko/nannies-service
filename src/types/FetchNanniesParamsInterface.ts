@@ -5,6 +5,4 @@ export interface FetchNanniesParams {
   direction?: 'asc' | 'desc';
   priceGreaterThan?: number;
   priceLessThan?: number;
-  ratingGreaterThan?: number;
-  ratingLessThan?: number;
 }

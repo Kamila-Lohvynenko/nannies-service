@@ -13,8 +13,6 @@ import LogoutModal from '../Modals/LogoutModal/LogoutModal';
 const UserMenu = () => {
   const isLoggedIn = useAppSelector(selectLogin);
 
-  console.log(isLoggedIn);
-
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
   const [isLogoutOpen, setIsLogoutOpen] = useState<boolean>(false);

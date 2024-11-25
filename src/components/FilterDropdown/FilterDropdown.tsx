@@ -31,8 +31,10 @@ const FilterDropdown: React.FC = () => {
     [FILTERS.DESC]: () => dispatch(setFilter({ direction: 'desc' })),
     [FILTERS.CHEAP]: () => dispatch(setFilter({ priceLessThan: 10 })),
     [FILTERS.EXPENSIVE]: () => dispatch(setFilter({ priceGreaterThan: 10 })),
-    [FILTERS.POPULAR]: () => dispatch(setFilter({ ratingGreaterThan: 4.81 })),
-    [FILTERS.NOT_POPULAR]: () => dispatch(setFilter({ ratingLessThan: 4.81 })),
+    [FILTERS.POPULAR]: () =>
+      dispatch(setFilter({ sortBy: 'rating', direction: 'desc' })),
+    [FILTERS.NOT_POPULAR]: () =>
+      dispatch(setFilter({ sortBy: 'rating', direction: 'asc' })),
     [FILTERS.ALL]: () => dispatch(setFilter({})),
   };
 
