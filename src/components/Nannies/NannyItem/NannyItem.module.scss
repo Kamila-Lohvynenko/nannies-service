@@ -52,4 +52,12 @@
   margin-top: 14px;
 
   text-decoration: underline;
+
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #716d6de7;
+  }
 }

@@ -47,6 +47,7 @@
 
   @include mx.mq($bp: 'desk', $type: max) {
     bottom: 10px;
+    left: 118px;
     background-color: var.$dark-color;
   }
 }
