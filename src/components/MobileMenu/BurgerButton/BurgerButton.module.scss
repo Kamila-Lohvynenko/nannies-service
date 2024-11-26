@@ -1,0 +1,16 @@
+@use '../../../styles/utils/variables' as var;
+@use '../../../styles/utils/mixins' as mx;
+
+.button {
+  display: block;
+  @include mx.mq('desk') {
+    display: none;
+  }
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+
+  fill: var.$light-color;
+}

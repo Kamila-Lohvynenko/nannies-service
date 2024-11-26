@@ -2,48 +2,100 @@
 @use '../../styles/utils/placeholders' as *;
 @use '../../styles/utils/mixins' as mx;
 
+.pageWrapper {
+  padding: 16px;
+  @include mx.mq('desk') {
+    padding: 32px;
+  }
+}
+
 .page {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  display: block;
+  min-height: calc(100vh - 88px);
+  overflow: auto;
 
   overflow: hidden;
-  margin: 32px;
 
   border-radius: 30px;
+
+  @include mx.mq('tab') {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include mx.mq('desk') {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .contentWrapper {
-  padding-top: 250px;
-  padding-left: 96px;
-  padding-bottom: 163px;
+  display: flex;
+  align-items: center;
 
-  color: #fbfbfb;
+  min-height: calc(100vh - 88px);
+
+  padding-left: 48px;
+  padding-right: 16px;
+
+  color: var.$light-color;
+
+  @include mx.mq('tab') {
+    padding-left: 72px;
+  }
+
+  @include mx.mq('desk') {
+    padding-left: 96px;
+  }
 }
 
 .title {
   margin-bottom: 28px;
 
-  font-size: 70px;
+  font-size: 44px;
   font-weight: 500;
   line-height: 1;
-  letter-spacing: -2.1px;
+  letter-spacing: -0.03em;
+
+  @include mx.mq('tab') {
+    font-size: 60px;
+  }
+
+  @include mx.mq('desk') {
+    font-size: 70px;
+  }
 }
 
 .text {
   margin-bottom: 64px;
 
-  font-size: 28px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.07;
-  letter-spacing: -0.56px;
+  letter-spacing: -0.02em;
+
+  @include mx.mq('tab') {
+    font-size: 22px;
+  }
+
+  @include mx.mq('desk') {
+    font-size: 28px;
+  }
 }
 
 .imageWrapper {
+  display: none;
+
   position: relative;
 
   background-image: url(../../images/home_page.jpg);
   overflow: hidden;
+
+  @include mx.mq('tab') {
+    display: block;
+  }
 }
 
 @media (min-device-pixel-ratio: 2),
@@ -100,8 +152,13 @@
 .dropdown {
   position: absolute;
 
-  top: 124px;
-  right: 50px;
+  top: 98px;
+  right: 12px;
+
+  @include mx.mq('tab') {
+    top: 124px;
+    right: 50px;
+  }
 }
 
 .info {
@@ -116,7 +173,6 @@
 
   border-radius: 20px;
   background-color: var.$light-color;
-  z-index: 5;
 }
 
 .checkBox {

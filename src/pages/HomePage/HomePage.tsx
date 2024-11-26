@@ -21,31 +21,39 @@ const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <div className={pageClassName}>
-      <div className={styles.contentWrapper}>
-        <h1 className={styles.title}>Make Life Easier for the Family:</h1>
-        <p className={styles.text}>Find Babysitters Online for All Occasions</p>
-        <Link to="/nannies" className={styles.link}>
-          Get started
-          <svg className={styles.icon}>
-            <use href={`${sprite}#icon-arrow`} />
-          </svg>
-        </Link>
-      </div>
-      <div className={styles.imageWrapper}>
+    <div className={styles.pageWrapper}>
+      <div className={pageClassName}>
+        <div className={styles.contentWrapper}>
+          <div>
+            <h1 className={styles.title}>Make Life Easier for the Family:</h1>
+            <p className={styles.text}>
+              Find Babysitters Online for All Occasions
+            </p>
+            <Link to="/nannies" className={styles.link}>
+              Get started
+              <svg className={styles.icon}>
+                <use href={`${sprite}#icon-arrow`} />
+              </svg>
+            </Link>
+          </div>
+        </div>
+        <div className={styles.imageWrapper}>
+          <div className={styles.info}>
+            <div
+              className={`${styles.checkBox} ${styles[`checkBox--${color}`]}`}
+            >
+              <svg className={styles.icon}>
+                <use href={`${sprite}#icon-check`} />
+              </svg>
+            </div>
+            <div className={styles.infoText}>
+              <p>Experienced nannies</p>
+              <p className={styles.price}>15,000</p>
+            </div>
+          </div>
+        </div>
         <div className={styles.dropdown}>
           <ColorDropdown home={true} />
-        </div>
-        <div className={styles.info}>
-          <div className={`${styles.checkBox} ${styles[`checkBox--${color}`]}`}>
-            <svg className={styles.icon}>
-              <use href={`${sprite}#icon-check`} />
-            </svg>
-          </div>
-          <div className={styles.infoText}>
-            <p>Experienced nannies</p>
-            <p className={styles.price}>15,000</p>
-          </div>
         </div>
       </div>
     </div>

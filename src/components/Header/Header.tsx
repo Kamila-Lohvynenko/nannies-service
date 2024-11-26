@@ -6,6 +6,7 @@ import Navigation from '../Navigation/Navigation';
 import UserMenu from '../UserMenu/UserMenu';
 import { useAppSelector } from '../../redux/store/hooks';
 import { selectColor } from '../../redux/color/selectors';
+import BurgerButton from '../MobileMenu/BurgerButton/BurgerButton';
 
 const Header = () => {
   const color = useAppSelector(selectColor);
@@ -23,8 +24,13 @@ const Header = () => {
   return (
     <header className={headerClassName}>
       <Logo />
-      <Navigation home={home} />
-      <UserMenu />
+      <div className={styles.navWrapper}>
+        <Navigation home={home} />
+      </div>
+      <div className={styles.userMenuWrapper}>
+        <UserMenu />
+      </div>
+      <BurgerButton />
     </header>
   );
 };
