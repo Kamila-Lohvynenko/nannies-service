@@ -5,16 +5,26 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @include mx.mq('tab') {
+  }
+
+  @include mx.mq('desk') {
+  }
 }
 
 .info {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .item {
   @include mx.flex-center;
   gap: 8px;
-  padding: 0 16px;
+
+  padding: 4px 8px;
 
   svg {
     height: 16px;
@@ -28,7 +38,15 @@
   &:not(:last-child) {
     border-right: 1px solid rgba(var.$dark-color, 0.2);
   }
+
+  @include mx.mq('tab') {
+  }
+
+  @include mx.mq('desk') {
+    padding: 0 16px;
+  }
 }
+
 .iconMap {
   fill: transparent;
   stroke: var.$dark-color;

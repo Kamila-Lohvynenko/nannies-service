@@ -1,4 +1,5 @@
 @use '../../../styles/utils/variables' as var;
+@use '../../../styles/utils/mixins' as mx;
 @use '../../../styles/utils/placeholders' as *;
 
 .name {
@@ -14,8 +15,8 @@
 .avatarWrapper {
   display: inline-flex;
 
-  width: 120px;
-  height: 120px;
+  width: 96px;
+  height: 96px;
 
   padding: 12px;
 
@@ -26,13 +27,23 @@
       border-color: rgba($value, 0.2);
     }
   }
+
+  @include mx.mq('desk') {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 .avatar {
-  width: 96px;
-  height: 96px;
+  width: 68px;
+  height: 68px;
 
   border-radius: 15px;
+
+  @include mx.mq('desk') {
+    width: 96px;
+    height: 96px;
+  }
 }
 
 .button {

@@ -1,15 +1,26 @@
 @use '../../../styles/utils/variables' as var;
+@use '../../../styles/utils/mixins' as mx;
 
 .item {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  column-gap: 24px;
+  grid-template-columns: 1fr;
+  column-gap: 12px;
 
   padding: 24px;
   margin-bottom: 32px;
 
   border-radius: 24px;
   background: var.$light-color;
+
+  @include mx.mq('tab') {
+    grid-template-columns: 120px 1fr;
+
+    column-gap: 18px;
+  }
+
+  @include mx.mq('desk') {
+    column-gap: 24px;
+  }
 }
 
 .list .item:last-child {

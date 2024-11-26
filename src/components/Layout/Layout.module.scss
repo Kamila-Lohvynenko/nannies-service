@@ -2,15 +2,7 @@
 
 .layout {
   min-width: 320px;
-  // max-width: 375px;
   max-width: 1440px;
 
   margin: 0 auto;
-
-  // @include mx.mq('tab') {
-  //   max-width: 768px;
-  // }
-  // @include mx.mq('desk') {
-  //   max-width: 1440px;
-  // }
 }
