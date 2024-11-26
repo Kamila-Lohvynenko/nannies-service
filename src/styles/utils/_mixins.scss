@@ -1,3 +1,7 @@
+@use 'sass:map';
+
+@use 'variables' as var;
+
 @mixin flex-center($column: false) {
   display: flex;
   align-items: center;
@@ -5,5 +9,29 @@
 
   @if $column {
     flex-direction: column;
+  }
+}
+
+@mixin mq($bp: mob, $type: min, $is-retina: false) {
+  @if map.has-key(var.$breakpoints, $bp) {
+    $width: map.get(var.$breakpoints, $bp);
+
+    @if $type == max {
+      $width: $width - 0.02px;
+    }
+
+    @media only screen and (#{$type}-width: $width) {
+      @if $is-retina {
+        @media (min-device-pixel-ratio: 2),
+          (min-resolution: 192dpi),
+          (min-resolution: 2dppx) {
+          @content;
+        }
+      } @else {
+        @content;
+      }
+    }
+  } @else {
+    @error "Invalid value for breakpoint";
   }
 }
