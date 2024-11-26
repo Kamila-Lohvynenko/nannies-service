@@ -1,13 +1,35 @@
 @use '../../styles/utils/variables' as var;
+@use '../../styles/utils/mixins' as mx;
 
 .nav {
   display: flex;
+  flex-direction: row;
   gap: 40px;
+
+  @include mx.mq($bp: 'desk', $type: max) {
+    flex-direction: column;
+
+    color: var.$dark-color;
+  }
 }
 
 .link {
   position: relative;
   color: var.$light-color;
+
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #ffffff41;
+  }
+
+  @include mx.mq($bp: 'desk', $type: max) {
+    color: var.$dark-color;
+
+    font-size: 28px;
+  }
 }
 
 .active::after {
@@ -22,6 +44,11 @@
 
   background-color: var.$light-color;
   border-radius: 50%;
+
+  @include mx.mq($bp: 'desk', $type: max) {
+    bottom: 10px;
+    background-color: var.$dark-color;
+  }
 }
 .home {
   position: absolute;

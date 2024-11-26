@@ -11,6 +11,10 @@
   font-weight: 500;
   line-height: 1.11;
   letter-spacing: -0.18px;
+
+  @include mx.mq($bp: 'desk', $type: max) {
+    color: var.$dark-color;
+  }
 }
 
 .iconWrapper {

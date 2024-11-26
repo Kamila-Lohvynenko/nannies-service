@@ -30,6 +30,12 @@
 
   cursor: pointer;
 
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.7);
+  }
+
   @each $color, $value in var.$accent-colors {
     &--#{$color} {
       background-color: $value;

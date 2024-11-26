@@ -10,7 +10,11 @@ import { useAppSelector } from '../../redux/store/hooks';
 import { selectLogin } from '../../redux/auth/selectors';
 import LogoutModal from '../Modals/LogoutModal/LogoutModal';
 
-const UserMenu = () => {
+interface UserMenuProps {
+  closeMenu?: () => void;
+}
+
+const UserMenu = ({ closeMenu }: UserMenuProps) => {
   const isLoggedIn = useAppSelector(selectLogin);
 
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
@@ -19,15 +23,19 @@ const UserMenu = () => {
 
   const menuClassName = clsx(styles.menu, isLoggedIn && styles.loggedIn);
 
+  const handleClick = (callback: (v: boolean) => void) => {
+    callback(true);
+    if (closeMenu !== undefined) closeMenu();
+  };
+
   return (
     <div className={menuClassName}>
       {isLoggedIn ? (
         <>
           <UserInfo />
           <Button
-            onClick={() => {
-              setIsLogoutOpen(true);
-            }}
+            onClick={() => handleClick(setIsLogoutOpen)}
+            accent={!!closeMenu}
           >
             Log out
           </Button>
@@ -36,17 +44,13 @@ const UserMenu = () => {
         <>
           <Button
             onClick={() => {
-              setIsLoginOpen(true);
+              handleClick(setIsLoginOpen);
             }}
+            accent={!!closeMenu}
           >
             Log in
           </Button>
-          <Button
-            onClick={() => {
-              setIsRegisterOpen(true);
-            }}
-            accent={true}
-          >
+          <Button onClick={() => handleClick(setIsRegisterOpen)} accent={true}>
             Registration
           </Button>
         </>

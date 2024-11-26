@@ -1,8 +1,10 @@
+@use '../../styles/utils/variables' as var;
+
 .menu {
   display: none;
 
   position: absolute;
-  top: 0;
+  top: -32px;
   right: 0;
   z-index: 1000;
 
@@ -11,13 +13,9 @@
 
   background: rgba($color: #000000, $alpha: 0.3);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-
-  //   transform: translateX(100%);
-  //   transition: transform 0.3s ease;
 }
 
 .menu.isOpen {
-  //   transform: translateX(0);
   display: block;
 }
 
@@ -29,26 +27,24 @@
   width: 80vw;
   height: 100%;
 
-  padding: 48px 24px;
+  padding: 64px 32px;
   margin-left: auto;
-  background-color: #fff;
+  background-color: var.$light-secondary-color;
 }
 
 .closeButton {
   position: absolute;
-  top: 64px;
-  right: 80px;
+  top: 32px;
+  right: 32px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  //   z-index: 102;
 }
 
 .icon {
-  width: 14px;
-  height: 14px;
+  width: 32px;
+  height: 32px;
 
   fill: black;
   stroke: black;

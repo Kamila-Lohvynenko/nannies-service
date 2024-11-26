@@ -1,6 +1,14 @@
+@use '../../styles/utils/variables' as var;
+@use '../../styles/utils/mixins' as mx;
+
 .menu {
   display: flex;
   gap: 8px;
+
+  @include mx.mq($bp: 'desk', $type: max) {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
 .loggedIn {

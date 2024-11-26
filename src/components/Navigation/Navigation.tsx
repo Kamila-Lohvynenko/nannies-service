@@ -6,9 +6,10 @@ import { selectLogin } from '../../redux/auth/selectors';
 
 interface NavigationProps {
   home: boolean;
+  closeMenu?: () => void;
 }
 
-const Navigation = ({ home }: NavigationProps) => {
+const Navigation = ({ home, closeMenu }: NavigationProps) => {
   const login = useAppSelector(selectLogin);
 
   const linkClassName = ({ isActive }: { isActive: boolean }) =>
@@ -16,14 +17,14 @@ const Navigation = ({ home }: NavigationProps) => {
 
   return (
     <nav className={`${styles.nav} ${home && styles.home}`}>
-      <NavLink className={linkClassName} to="/">
+      <NavLink className={linkClassName} to="/" onClick={closeMenu}>
         Home
       </NavLink>
-      <NavLink to="/nannies" className={linkClassName}>
+      <NavLink to="/nannies" className={linkClassName} onClick={closeMenu}>
         Nannies
       </NavLink>
       {!home && login && (
-        <NavLink to="/favorites" className={linkClassName}>
+        <NavLink to="/favorites" className={linkClassName} onClick={closeMenu}>
           Favorites
         </NavLink>
       )}

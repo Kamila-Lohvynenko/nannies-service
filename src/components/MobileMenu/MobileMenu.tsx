@@ -9,16 +9,20 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ setIsOpen, isOpen }: MobileMenuProps) => {
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className={`${styles.menu} ${isOpen && styles.isOpen}`}>
       <div className={styles.content}>
-        <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
+        <button className={styles.closeButton} onClick={closeMenu}>
           <svg className={styles.icon}>
             <use href={`${sprite}#icon-close`} />
           </svg>
         </button>
-        <Navigation home={false} />
-        <UserMenu />
+        <Navigation home={false} closeMenu={closeMenu} />
+        <UserMenu closeMenu={closeMenu} />
       </div>
     </div>
   );
