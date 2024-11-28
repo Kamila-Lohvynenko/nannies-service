@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './FilterDropdown.module.scss';
 import sprite from '../../images/sprite.svg';
 import { setFilter } from '../../redux/filters/slice';
 import { useAppDispatch } from '../../redux/store/hooks';
 import { useSelector } from 'react-redux';
 import { selectColor } from '../../redux/color/selectors';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 enum FILTERS {
   ASC = 'A to Z',
@@ -45,22 +46,7 @@ const FilterDropdown: React.FC = () => {
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  useClickOutside(dropdownRef, () => setIsOpen(false));
 
   return (
     <div className={styles.wrapper} ref={dropdownRef}>

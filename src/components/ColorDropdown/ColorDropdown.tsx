@@ -3,7 +3,8 @@ import sprite from '../../images/sprite.svg';
 import { setColor } from '../../redux/color/slice';
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { selectColor } from '../../redux/color/selectors';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 enum COLORS {
   RED = 'Red',
@@ -35,22 +36,7 @@ const ColorDropdown = ({ home }: ColorDropdownProps) => {
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  useClickOutside(dropdownRef, () => setIsOpen(false));
 
   return (
     <div className={styles.wrapper} ref={dropdownRef}>
