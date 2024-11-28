@@ -1,4 +1,5 @@
 @use '../../../styles/utils/variables' as var;
+@use '../../../styles/utils/mixins' as mx;
 @use '../../../styles//utils/placeholders' as *;
 
 .form {
@@ -11,12 +12,26 @@
   row-gap: 16px;
 
   grid-template-areas:
-    'address phone'
-    'child time'
+    'address address'
+    'phone phone'
+    'child child'
+    'time time'
     'email email'
     'parent parent'
     'comment  comment'
     'button button';
+
+  @include mx.mq('tab') {
+    // grid-template-columns: 1fr 1fr;
+
+    grid-template-areas:
+      'address phone'
+      'child time'
+      'email email'
+      'parent parent'
+      'comment  comment'
+      'button button';
+  }
 }
 
 .input {
