@@ -23,7 +23,11 @@ const Modal = ({ children, isOpen, setIsOpen }: ModalProps) => {
       onAfterClose={() => (document.body.style.overflow = 'unset')}
     >
       <div className={styles.modalContent}>
-        <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
+        <button
+          className={styles.closeButton}
+          onClick={() => setIsOpen(false)}
+          aria-label="close modal button"
+        >
           <svg className={styles.icon}>
             <use href={`${sprite}#icon-close`} />
           </svg>

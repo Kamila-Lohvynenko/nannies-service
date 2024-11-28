@@ -22,7 +22,11 @@ const MobileMenu = ({ setIsOpen, isOpen }: MobileMenuProps) => {
   return (
     <div className={`${styles.menu} ${isOpen && styles.isOpen}`}>
       <div className={styles.content} ref={menuContentRef}>
-        <button className={styles.closeButton} onClick={closeMenu}>
+        <button
+          className={styles.closeButton}
+          onClick={closeMenu}
+          aria-label="close mobile menu"
+        >
           <svg className={styles.icon}>
             <use href={`${sprite}#icon-close`} />
           </svg>

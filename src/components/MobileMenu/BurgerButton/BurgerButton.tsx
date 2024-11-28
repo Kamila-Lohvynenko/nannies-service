@@ -11,6 +11,7 @@ const BurgerButton = () => {
       <button
         className={styles.button}
         onClick={() => setIsOpen((prev) => !prev)}
+        aria-label="open mobile menu"
       >
         <svg className={styles.icon} aria-hidden="true">
           <use href={`${sprite}#icon-menu`} />
