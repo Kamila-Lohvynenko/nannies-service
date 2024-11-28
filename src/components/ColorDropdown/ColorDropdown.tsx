@@ -3,7 +3,7 @@ import sprite from '../../images/sprite.svg';
 import { setColor } from '../../redux/color/slice';
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { selectColor } from '../../redux/color/selectors';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 enum COLORS {
   RED = 'Red',
@@ -20,6 +20,7 @@ const ColorDropdown = ({ home }: ColorDropdownProps) => {
 
   const dispatch = useAppDispatch();
   const color = useAppSelector(selectColor);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const colors = Object.values(COLORS);
 
@@ -34,8 +35,25 @@ const ColorDropdown = ({ home }: ColorDropdownProps) => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`${styles.select} ${styles[`select--${color}`]} ${

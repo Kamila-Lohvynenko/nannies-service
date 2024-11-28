@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './FilterDropdown.module.scss';
 import sprite from '../../images/sprite.svg';
 import { setFilter } from '../../redux/filters/slice';
@@ -23,6 +23,7 @@ const FilterDropdown: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const color = useSelector(selectColor);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const filters = Object.values(FILTERS);
 
@@ -44,8 +45,25 @@ const FilterDropdown: React.FC = () => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={dropdownRef}>
       <p>Filters</p>
 
       <button
