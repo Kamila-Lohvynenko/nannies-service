@@ -78,7 +78,10 @@ export const fetchNannies = createAsyncThunk<
 
     return { data: nannies, lastDocId: newLastDocId };
   } catch (error: any) {
-    const { status, message } = error;
-    return thunkAPI.rejectWithValue({ status, message });
+    console.error('Error fetching nannies:', error);
+    return thunkAPI.rejectWithValue({
+      status: error.code || 500, // Use Firestore error code or a default value
+      message: error.message || 'An unexpected error occurred.',
+    });
   }
 });
